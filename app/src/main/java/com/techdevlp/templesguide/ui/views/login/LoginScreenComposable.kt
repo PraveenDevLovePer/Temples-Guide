@@ -1,6 +1,7 @@
-package com.techdevlp.templesguide.views.login
+package com.techdevlp.templesguide.ui.views.login
 
 import android.app.Activity
+import android.content.Intent
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -32,6 +33,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.techdevlp.templesguide.ui.HomeScreenActivity
 import com.techdevlp.templesguide.MyApplicationContext
 import com.techdevlp.templesguide.R
 import com.techdevlp.templesguide.localdata.LocalStoredData
@@ -58,7 +60,7 @@ fun LoginScreenComposable(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-        handleSignInResult(task, navController)
+        handleSignInResult(task, navController, activity)
     }
 
     Column(
@@ -101,7 +103,11 @@ fun LoginScreenComposable(
     }
 }
 
-fun handleSignInResult(task: Task<GoogleSignInAccount>, navController: NavController) {
+fun handleSignInResult(
+    task: Task<GoogleSignInAccount>,
+    navController: NavController,
+    activity: Activity
+) {
     try {
         CoroutineScope(Dispatchers.Main).launch {
             val account = task.getResult(ApiException::class.java)
@@ -115,8 +121,10 @@ fun handleSignInResult(task: Task<GoogleSignInAccount>, navController: NavContro
             )
             dataStore.setUserDetails(userDetails)
 
+//            activity.startActivity(Intent(activity, HomeScreenActivity::class.java))
+//            activity.finish()
             navController.navigate(route = ScreenNames.HomeScreen.route) {
-                popUpTo(route = ScreenNames.LoginScreen.route) {
+                popUpTo(route = ScreenNames.SplashScreen.route) {
                     inclusive = true
                 }
             }

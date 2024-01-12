@@ -1,6 +1,7 @@
-package com.techdevlp.templesguide.views.splashscreen
+package com.techdevlp.templesguide.ui.views.splashscreen
 
 import android.Manifest
+import android.app.Activity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -21,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -39,8 +41,9 @@ fun SplashScreenComposable(
     mViewModel: SplashScreenViewModel = viewModel()
 ) {
 
+    val activity = LocalContext.current as Activity
     SetAppLogo()
-    CallGetCurrentLocation(navController = navController, mViewModel = mViewModel)
+    CallGetCurrentLocation(navController = navController, mViewModel = mViewModel, context = activity)
 }
 
 @Composable
@@ -86,7 +89,7 @@ fun SetAppLogo(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun CallGetCurrentLocation(navController: NavController, mViewModel: SplashScreenViewModel) {
+fun CallGetCurrentLocation(navController: NavController, mViewModel: SplashScreenViewModel, context:Activity) {
     var isPermissionGranted by remember { mutableStateOf(false) }
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission()
@@ -96,7 +99,7 @@ fun CallGetCurrentLocation(navController: NavController, mViewModel: SplashScree
             mViewModel.getLocationAndGeocode(
                 fusedLocationClient = LocationServices.getFusedLocationProviderClient(
                     MyApplicationContext.getContext()
-                ), navController = navController
+                ), navController = navController, context = context
             )
         } else {
             isPermissionGranted = false

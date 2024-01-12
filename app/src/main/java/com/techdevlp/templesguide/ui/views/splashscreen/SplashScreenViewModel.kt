@@ -1,6 +1,8 @@
-package com.techdevlp.templesguide.views.splashscreen
+package com.techdevlp.templesguide.ui.views.splashscreen
 
 import android.Manifest
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import androidx.core.app.ActivityCompat
@@ -12,6 +14,7 @@ import com.techdevlp.templesguide.localdata.LocalStoredData
 import com.techdevlp.templesguide.localdata.model.LocationDetails
 import com.techdevlp.templesguide.navigations.ScreenNames
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.techdevlp.templesguide.ui.HomeScreenActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -22,7 +25,7 @@ import java.util.Locale
 class SplashScreenViewModel : ViewModel() {
     fun getLocationAndGeocode(
         fusedLocationClient: FusedLocationProviderClient,
-        navController: NavController
+        navController: NavController,context: Activity
     ) {
         viewModelScope.launch {
             try {
@@ -34,7 +37,7 @@ class SplashScreenViewModel : ViewModel() {
                         Manifest.permission.ACCESS_COARSE_LOCATION
                     ) != PackageManager.PERMISSION_GRANTED
                 ) {
-                    navigateToNextScreen(navController = navController)
+                    navigateToNextScreen(navController = navController, context = context)
                     return@launch
                 }
 
@@ -71,20 +74,20 @@ class SplashScreenViewModel : ViewModel() {
                         )
                         val dataStore = LocalStoredData(MyApplicationContext.getContext())
                         dataStore.setLocationDetails(locationDetails)
-                        navigateToNextScreen(navController = navController)
+                        navigateToNextScreen(navController = navController, context = context)
                     } else {
-                        navigateToNextScreen(navController = navController)
+                        navigateToNextScreen(navController = navController, context = context)
                     }
                 } else {
-                    navigateToNextScreen(navController = navController)
+                    navigateToNextScreen(navController = navController, context = context)
                 }
             } catch (e: Exception) {
-                navigateToNextScreen(navController = navController)
+                navigateToNextScreen(navController = navController, context = context)
             }
         }
     }
 
-    private fun navigateToNextScreen(navController: NavController) {
+    private fun navigateToNextScreen(navController: NavController, context: Activity) {
         viewModelScope.launch {
             val dataStore = LocalStoredData(MyApplicationContext.getContext())
             delay(2000)
@@ -95,8 +98,10 @@ class SplashScreenViewModel : ViewModel() {
                     }
                 }
             } else {
+//                context.startActivity(Intent(context, HomeScreenActivity::class.java))
+//                context.finish()
                 navController.navigate(route = ScreenNames.HomeScreen.route) {
-                    popUpTo(route = ScreenNames.LoginScreen.route) {
+                    popUpTo(route = ScreenNames.SplashScreen.route) {
                         inclusive = true
                     }
                 }

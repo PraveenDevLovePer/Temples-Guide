@@ -7,9 +7,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.techdevlp.templesguide.SetNavigationBarColor
 import com.techdevlp.templesguide.SetStatusBarColor
-import com.techdevlp.templesguide.views.home.HomeScreenComposable
-import com.techdevlp.templesguide.views.login.LoginScreenComposable
-import com.techdevlp.templesguide.views.splashscreen.SplashScreenComposable
+import com.techdevlp.templesguide.ui.views.home.HomeScreenComposable
+import com.techdevlp.templesguide.ui.views.login.LoginScreenComposable
+import com.techdevlp.templesguide.ui.views.splashscreen.SplashScreenComposable
 
 @Composable
 fun NavGraphComposable(navController: NavHostController) {
