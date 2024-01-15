@@ -2,19 +2,17 @@ package com.techdevlp.templesguide.ui.views.splashscreen
 
 import android.Manifest
 import android.app.Activity
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.techdevlp.templesguide.MyApplicationContext
 import com.techdevlp.templesguide.localdata.LocalStoredData
 import com.techdevlp.templesguide.localdata.model.LocationDetails
 import com.techdevlp.templesguide.navigations.ScreenNames
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.techdevlp.templesguide.ui.HomeScreenActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

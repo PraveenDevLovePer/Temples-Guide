@@ -12,4 +12,3 @@ val Pink40 = Color(0xFF7D5260)
 
 val AppThemeColor = Color(0xFFF7A51D)
 val Black = Color(0xFF2B2B2B)
-val White = Color(0xFFF8F7F2)

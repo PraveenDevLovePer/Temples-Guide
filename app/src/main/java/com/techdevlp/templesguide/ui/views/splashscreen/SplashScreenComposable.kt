@@ -22,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -33,7 +34,6 @@ import com.techdevlp.templesguide.MyApplicationContext
 import com.techdevlp.templesguide.R
 import com.techdevlp.templesguide.ui.theme.AppThemeColor
 import com.techdevlp.templesguide.ui.theme.Typography
-import com.techdevlp.templesguide.ui.theme.White
 
 @Composable
 fun SplashScreenComposable(
@@ -75,14 +75,14 @@ fun SetAppLogo(modifier: Modifier = Modifier) {
                         .aspectRatio(3f / 1f),
                     style = Typography.titleLarge,
                     textAlign = TextAlign.Center,
-                    color = White
+                    color = Color.White
                 )
             }
             LinearProgressIndicator(
                 modifier = modifier
                     .fillMaxWidth()
                     .align(Alignment.BottomCenter),
-                color = White
+                color = Color.White
             )
         }
     }

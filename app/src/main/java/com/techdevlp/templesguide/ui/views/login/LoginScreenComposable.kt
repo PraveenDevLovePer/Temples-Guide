@@ -1,7 +1,6 @@
 package com.techdevlp.templesguide.ui.views.login
 
 import android.app.Activity
-import android.content.Intent
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -33,13 +32,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.techdevlp.templesguide.ui.HomeScreenActivity
 import com.techdevlp.templesguide.MyApplicationContext
 import com.techdevlp.templesguide.R
 import com.techdevlp.templesguide.localdata.LocalStoredData
 import com.techdevlp.templesguide.localdata.model.UserDetails
 import com.techdevlp.templesguide.navigations.ScreenNames
-import com.techdevlp.templesguide.ui.theme.White
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -66,7 +63,7 @@ fun LoginScreenComposable(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(White),
+            .background(Color.White),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
