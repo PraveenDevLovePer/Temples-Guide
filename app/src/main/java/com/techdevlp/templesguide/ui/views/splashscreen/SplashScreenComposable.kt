@@ -24,9 +24,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.google.android.gms.location.LocationServices
@@ -66,7 +66,7 @@ fun SetAppLogo(modifier: Modifier = Modifier) {
                     contentDescription = "Image Description",
                     modifier = modifier
                         .fillMaxWidth()
-                        .padding(bottom = 15.dp)
+                        .padding(bottom = dimensionResource(id = R.dimen.dp15))
                 )
                 Text(
                     text = MyApplicationContext.getContext().getString(R.string.app_name),

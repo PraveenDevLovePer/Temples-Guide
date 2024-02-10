@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "652135036998",
+    "project_id": "temples-guide-892f1",
+    "storage_bucket": "temples-guide-892f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652135036998:android:fd024844b95ef3ad3d3247",
+        "android_client_info": {
+          "package_name": "com.techdevlp.templesguide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "652135036998-4hff8sfq4vpbg6ebmgt6oi8pvij6vtuf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techdevlp.templesguide",
+            "certificate_hash": "9288db1aa0a6010039ab22e82b9761383b947da1"
+          }
+        },
+        {
+          "client_id": "652135036998-r8o582thccjs3ak2s4e8re7b4ishfq4p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techdevlp.templesguide",
+            "certificate_hash": "1bf1c6cc5d715575933070f1e1db1a3cad839a7d"
+          }
+        },
+        {
+          "client_id": "652135036998-gqtu9nnjlhpggmfl2bttq4hi4scetdji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLq3WmurB8PzpGWvlSkto5wrkkGwlOPyE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "652135036998-gqtu9nnjlhpggmfl2bttq4hi4scetdji.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

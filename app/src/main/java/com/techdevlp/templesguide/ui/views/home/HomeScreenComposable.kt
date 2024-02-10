@@ -19,22 +19,23 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.techdevlp.templesguide.MyApplicationContext
+import com.techdevlp.templesguide.R
 import com.techdevlp.templesguide.SetNavigationBarColor
 import com.techdevlp.templesguide.SetStatusBarColor
 import com.techdevlp.templesguide.localdata.LocalStoredData
 import com.techdevlp.templesguide.localdata.model.LocationDetails
 import com.techdevlp.templesguide.localdata.model.UserDetails
+import com.techdevlp.templesguide.spTextSizeResource
 import com.techdevlp.templesguide.ui.theme.Black
 
 @Composable
@@ -52,31 +53,52 @@ fun HomeScreenComposable(navController: NavController) {
     SetStatusBarColor(color = Color.Transparent, isIconLight = true)
     SetNavigationBarColor(color = Color.Transparent, isIconLight = true)
 
+    HeaderViewsUi(userDetails, locationDetails)
 
+    HomeListUI()
+}
+
+@Composable
+fun HomeListUI() {
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .background(Color.White)) {
+        Text(text = "Suggested temples", style = TextStyle(fontSize = spTextSizeResource(id = R.dimen.sp18)))
+    }
+}
+
+@Composable
+fun HeaderViewsUi(
+    userDetails: MutableState<UserDetails?>,
+    locationDetails: MutableState<LocationDetails?>
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
     ) {
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.dp40)))
         Text(
             text = userDetails.value?.fullName ?: "Hello",
-            style = TextStyle(fontSize = 20.sp, color = Black),
-            modifier = Modifier.padding(start = 15.dp, end = 15.dp)
+            style = TextStyle(fontSize = spTextSizeResource(id = R.dimen.sp20), color = Black),
+            modifier = Modifier.padding(start = dimensionResource(id = R.dimen.dp15), end = dimensionResource(id = R.dimen.dp15))
         )
 
         Row {
             Icon(
                 imageVector = Icons.Outlined.LocationOn, contentDescription = "Location Icon",
                 tint = Color.Gray, modifier = Modifier
-                    .padding(start = 15.dp, top = 7.dp)
-                    .size(15.dp)
+                    .padding(
+                        start = dimensionResource(id = R.dimen.dp15),
+                        top = dimensionResource(id = R.dimen.dp7)
+                    )
+                    .size(dimensionResource(id = R.dimen.dp15))
             )
 
             Text(
                 text = locationDetails.value?.city ?: "",
-                style = TextStyle(fontSize = 13.sp, color = Color.Gray),
-                modifier = Modifier.padding(top = 6.dp, start = 5.dp)
+                style = TextStyle(fontSize = spTextSizeResource(id = R.dimen.sp13), color = Color.Gray),
+                modifier = Modifier.padding(top = dimensionResource(id = R.dimen.dp6), start = dimensionResource(id = R.dimen.dp5))
             )
         }
 
@@ -84,12 +106,12 @@ fun HomeScreenComposable(navController: NavController) {
         TextField(
             value = value,
             onValueChange = onValueChange,
-            textStyle = TextStyle(fontSize = 16.sp, color = Black),
+            textStyle = TextStyle(fontSize = spTextSizeResource(id = R.dimen.sp16), color = Black),
             leadingIcon = { Icon(Icons.Filled.Search, null, tint = Color.Gray) },
             modifier = Modifier
-                .padding(15.dp)
+                .padding(dimensionResource(id = R.dimen.dp15))
                 .fillMaxWidth()
-                .background(Color(0xFFFFF3EA), RoundedCornerShape(50.dp)),
+                .background(Color(0xFFFFF3EA), RoundedCornerShape(dimensionResource(id = R.dimen.dp50))),
             placeholder = { Text(text = "Search places here") },
             colors = OutlinedTextFieldDefaults.colors(
                 cursorColor = Color.Gray,
@@ -104,5 +126,5 @@ fun HomeScreenComposable(navController: NavController) {
 @Preview
 @Composable
 fun HomePreview() {
-    HomeScreenComposable(navController = rememberNavController())
+    HomeListUI()
 }

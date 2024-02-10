@@ -23,9 +23,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -37,6 +36,7 @@ import com.techdevlp.templesguide.R
 import com.techdevlp.templesguide.localdata.LocalStoredData
 import com.techdevlp.templesguide.localdata.model.UserDetails
 import com.techdevlp.templesguide.navigations.ScreenNames
+import com.techdevlp.templesguide.spTextSizeResource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -57,7 +57,7 @@ fun LoginScreenComposable(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-        handleSignInResult(task, navController, activity)
+        handleSignInResult(task, navController)
     }
 
     Column(
@@ -72,18 +72,18 @@ fun LoginScreenComposable(
             painter = painterResource(id = R.drawable.app_icon), contentDescription = "",
             modifier = Modifier
                 .clip(CircleShape)
-                .size(80.dp)
+                .size(dimensionResource(id = R.dimen.dp80))
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.dp20)))
 
         Text(
             text = "Connect us using Google",
-            fontSize = 16.sp,
+            fontSize = spTextSizeResource(id = R.dimen.sp16),
             color = Color.Black
         )
 
-        Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.dp5)))
 
         Image(
             painter = painterResource(id = R.drawable.google_button),
@@ -102,8 +102,7 @@ fun LoginScreenComposable(
 
 fun handleSignInResult(
     task: Task<GoogleSignInAccount>,
-    navController: NavController,
-    activity: Activity
+    navController: NavController
 ) {
     try {
         CoroutineScope(Dispatchers.Main).launch {
@@ -118,8 +117,6 @@ fun handleSignInResult(
             )
             dataStore.setUserDetails(userDetails)
 
-//            activity.startActivity(Intent(activity, HomeScreenActivity::class.java))
-//            activity.finish()
             navController.navigate(route = ScreenNames.HomeScreen.route) {
                 popUpTo(route = ScreenNames.SplashScreen.route) {
                     inclusive = true
