@@ -1,4 +1,4 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
+//@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
@@ -14,7 +14,7 @@ android {
         minSdk = 28
         targetSdk = 34
         versionCode = 1
-        versionName = "1.1"
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -104,8 +104,6 @@ dependencies {
     implementation(libs.firebase.auth.ktx )
     implementation(platform(libs.firebase.bom) )
 
-//    implementation 'com.google.android.gms:play-services-auth:20.7.0'
-//    implementation("com.google.firebase:firebase-analytics")
-
+    implementation(libs.material.v2)
 
 }

@@ -14,7 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import com.techdevlp.templesguide.navigations.NavGraphComposable
 import com.techdevlp.templesguide.ui.theme.TempleTripsTheme
 
-class AuthenticationActivity : ComponentActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)

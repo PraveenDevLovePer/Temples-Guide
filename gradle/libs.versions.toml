@@ -21,6 +21,7 @@ firebase-bom = "32.7.0"
 appcompat = "1.6.1"
 material = "1.11.0"
 constraintlayout = "2.1.4"
+material-2 = "1.6.0"
 
 [libraries]
 compose-ui = { module = "androidx.compose.ui:ui" }
@@ -60,6 +61,7 @@ firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "fir
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+material-v2 = { module = "androidx.compose.material:material", version.ref = "material-2" }
 
 [bundles]
 compose = ["compose-ui", "compose-ui-graphics", "compose-ui-preview", "compose-material3", "compose-ui-tooling", "compose-debug-ui-tooling", "compose-debug-ui-test-manifest"]

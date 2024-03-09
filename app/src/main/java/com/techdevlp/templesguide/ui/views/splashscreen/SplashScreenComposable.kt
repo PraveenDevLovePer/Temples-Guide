@@ -4,15 +4,11 @@ import android.Manifest
 import android.app.Activity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -24,8 +20,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -43,12 +37,19 @@ fun SplashScreenComposable(
 
     val activity = LocalContext.current as Activity
     SetAppLogo()
-    CallGetCurrentLocation(navController = navController, mViewModel = mViewModel, context = activity)
+    CallGetCurrentLocation(
+        navController = navController,
+        mViewModel = mViewModel,
+        context = activity
+    )
 }
 
+/**
+ * Splash screen ui
+ * @Version V1.0
+ */
 @Composable
 fun SetAppLogo(modifier: Modifier = Modifier) {
-    val imageResource = painterResource(R.drawable.app_icon)
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -61,35 +62,29 @@ fun SetAppLogo(modifier: Modifier = Modifier) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Image(
-                    painter = imageResource,
-                    contentDescription = "Image Description",
-                    modifier = modifier
-                        .fillMaxWidth()
-                        .padding(bottom = dimensionResource(id = R.dimen.dp15))
-                )
                 Text(
                     text = MyApplicationContext.getContext().getString(R.string.app_name),
                     modifier = modifier
-                        .fillMaxWidth()
-                        .aspectRatio(3f / 1f),
-                    style = Typography.titleLarge,
+                        .fillMaxWidth(),
+                    style = Typography.headlineLarge,
                     textAlign = TextAlign.Center,
-                    color = Color.White
+                    color = Color.White,
                 )
             }
-            LinearProgressIndicator(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .align(Alignment.BottomCenter),
-                color = Color.White
-            )
         }
     }
 }
 
+/**
+ * Ask location permission and Fetch device location.
+ * @Version V1.0
+ */
 @Composable
-fun CallGetCurrentLocation(navController: NavController, mViewModel: SplashScreenViewModel, context:Activity) {
+fun CallGetCurrentLocation(
+    navController: NavController,
+    mViewModel: SplashScreenViewModel,
+    context: Activity
+) {
     var isPermissionGranted by remember { mutableStateOf(false) }
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission()
@@ -99,7 +94,7 @@ fun CallGetCurrentLocation(navController: NavController, mViewModel: SplashScree
             mViewModel.getLocationAndGeocode(
                 fusedLocationClient = LocationServices.getFusedLocationProviderClient(
                     MyApplicationContext.getContext()
-                ), navController = navController, context = context
+                ), navController = navController
             )
         } else {
             isPermissionGranted = false

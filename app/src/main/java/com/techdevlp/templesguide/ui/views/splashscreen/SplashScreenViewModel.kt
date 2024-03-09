@@ -1,7 +1,6 @@
 package com.techdevlp.templesguide.ui.views.splashscreen
 
 import android.Manifest
-import android.app.Activity
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import androidx.core.app.ActivityCompat
@@ -21,9 +20,14 @@ import kotlinx.coroutines.withContext
 import java.util.Locale
 
 class SplashScreenViewModel : ViewModel() {
+
+    /**
+     * Get device location and address info using Geocode.
+     * @Version V1.0
+     */
     fun getLocationAndGeocode(
         fusedLocationClient: FusedLocationProviderClient,
-        navController: NavController,context: Activity
+        navController: NavController
     ) {
         viewModelScope.launch {
             try {
@@ -35,7 +39,7 @@ class SplashScreenViewModel : ViewModel() {
                         Manifest.permission.ACCESS_COARSE_LOCATION
                     ) != PackageManager.PERMISSION_GRANTED
                 ) {
-                    navigateToNextScreen(navController = navController, context = context)
+                    navigateToNextScreen(navController = navController)
                     return@launch
                 }
 
@@ -72,20 +76,24 @@ class SplashScreenViewModel : ViewModel() {
                         )
                         val dataStore = LocalStoredData(MyApplicationContext.getContext())
                         dataStore.setLocationDetails(locationDetails)
-                        navigateToNextScreen(navController = navController, context = context)
+                        navigateToNextScreen(navController = navController)
                     } else {
-                        navigateToNextScreen(navController = navController, context = context)
+                        navigateToNextScreen(navController = navController)
                     }
                 } else {
-                    navigateToNextScreen(navController = navController, context = context)
+                    navigateToNextScreen(navController = navController)
                 }
             } catch (e: Exception) {
-                navigateToNextScreen(navController = navController, context = context)
+                navigateToNextScreen(navController = navController)
             }
         }
     }
 
-    private fun navigateToNextScreen(navController: NavController, context: Activity) {
+    /**
+     * Navigate to another screen after fetch location details.
+     * @Version V1.0
+     */
+    private fun navigateToNextScreen(navController: NavController) {
         viewModelScope.launch {
             val dataStore = LocalStoredData(MyApplicationContext.getContext())
             delay(2000)
@@ -96,8 +104,6 @@ class SplashScreenViewModel : ViewModel() {
                     }
                 }
             } else {
-//                context.startActivity(Intent(context, HomeScreenActivity::class.java))
-//                context.finish()
                 navController.navigate(route = ScreenNames.HomeScreen.route) {
                     popUpTo(route = ScreenNames.SplashScreen.route) {
                         inclusive = true
