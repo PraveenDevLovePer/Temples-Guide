@@ -104,4 +104,11 @@ dependencies {
     //FireStore database
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.firestore)
+
+    //Coil for image loading
+    implementation(libs.coil.compose)
+
+    //For livedata
+    implementation (libs.androidx.runtime)
+    implementation (libs.androidx.runtime.livedata)
 }

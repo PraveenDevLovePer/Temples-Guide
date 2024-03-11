@@ -2,7 +2,6 @@ package com.techdevlp.templesguide.ui.views.home
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,7 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -30,6 +28,8 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -44,6 +44,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import coil.ImageLoader
+import coil.compose.AsyncImage
 import com.google.firebase.FirebaseApp
 import com.techdevlp.templesguide.MyApplicationContext
 import com.techdevlp.templesguide.R
@@ -77,13 +79,14 @@ fun HomeScreenComposable(
 
 //        Initialise the fire base
         FirebaseApp.initializeApp(activity)
+        myViewModel.getTemples()
     }
     SetStatusBarColor(color = Color.Transparent, isIconLight = true)
     SetNavigationBarColor(color = Color.Transparent, isIconLight = true)
 
     Column(modifier = Modifier.fillMaxSize()) {
         HeaderViewsUi(userDetails, locationDetails)
-        TemplesListUI()
+        TemplesListUI(myViewModel = myViewModel, activity = activity)
     }
 }
 
@@ -180,9 +183,10 @@ fun HeaderViewsUi(
  * @Version V1.0
  */
 @Composable
-fun TemplesListUI() {
+fun TemplesListUI(myViewModel: HomeScreenViewModel, activity: Activity) {
+    val templeList by myViewModel.templeList.observeAsState(emptyList())
     val listState = rememberLazyGridState()
-    val list = listOf("")
+
     Text(
         text = "Popular visits",
         style = TextStyle(fontSize = spTextSizeResource(id = R.dimen.sp18), color = Black),
@@ -205,14 +209,16 @@ fun TemplesListUI() {
                 end = dimensionResource(id = R.dimen.dp10)
             )
     ) {
-        items(list) { list ->
-            ListItemsUI()
+
+        items(templeList.size) { index ->
+            val templeData = templeList[index]
+            ListItemsUI(templeData = templeData, activity = activity)
         }
     }
 }
 
 @Composable
-fun ListItemsUI() {
+fun ListItemsUI(templeData: TemplesData?, activity: Activity) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -224,18 +230,22 @@ fun ListItemsUI() {
             .clickable { },
         verticalArrangement = Arrangement.Center
     ) {
-
-        Image(
-            painter = painterResource(id = R.drawable.app_icon),
-            contentDescription = "",
-            modifier = Modifier
-                .clip(RoundedCornerShape(dimensionResource(id = R.dimen.dp25)))
-        )
+        
+            AsyncImage(
+                model = templeData?.imageUrl,
+                contentDescription = "",
+                imageLoader = ImageLoader(activity),
+                modifier = Modifier
+                    .clip(RoundedCornerShape(dimensionResource(id = R.dimen.dp25)))
+                    .background(Color.Gray)
+                    .fillMaxSize(),
+                placeholder = painterResource(id = R.drawable.app_icon)
+            )
 
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.dp10)))
 
         Text(
-            text = "Temple name",
+            text = templeData?.name ?: "",
             style = TextStyle(fontSize = spTextSizeResource(id = R.dimen.sp16), color = Black),
             modifier = Modifier.padding(
                 start = dimensionResource(id = R.dimen.dp10),
@@ -256,7 +266,7 @@ fun ListItemsUI() {
             )
 
             Text(
-                text = "Temple address",
+                text = templeData?.city ?: "",
                 style = TextStyle(
                     fontSize = spTextSizeResource(id = R.dimen.sp13),
                     color = Color.Gray
@@ -274,3 +284,17 @@ fun ListItemsUI() {
 
     }
 }
+
+data class TemplesData(
+    val name: String,
+    val city: String,
+    val imageUrl: String,
+    val address: String,
+    val state: String,
+    val open: String,
+    val close: String,
+    val latitude: String,
+    val longitude: String,
+    val story: String,
+    val helpLine: String
+)

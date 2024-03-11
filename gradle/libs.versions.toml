@@ -24,8 +24,14 @@ firebase-firestore-ktx = "24.10.3"
 google-services = "4.4.1"
 firebase-firestore = "24.10.3"
 coroutines-play-services = "1.7.1"
+runtime = "1.6.3"
+runtime-livedata = "1.6.3"
+coil-compose = "2.6.0"
 
 [libraries]
+androidx-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "runtime" }
+androidx-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "runtime-livedata" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose" }
 compose-ui = { module = "androidx.compose.ui:ui" }
 compose-ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
 compose-ui-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
