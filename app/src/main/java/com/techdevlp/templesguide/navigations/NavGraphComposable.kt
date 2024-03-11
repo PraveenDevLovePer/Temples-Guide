@@ -5,9 +5,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.google.gson.Gson
+import com.techdevlp.templesguide.Constants.TEMPLE_DETAILS_DATA
 import com.techdevlp.templesguide.SetNavigationBarColor
 import com.techdevlp.templesguide.SetStatusBarColor
+import com.techdevlp.templesguide.ui.views.details.DetailsScreenComposable
 import com.techdevlp.templesguide.ui.views.home.HomeScreenComposable
+import com.techdevlp.templesguide.ui.views.home.TemplesData
 import com.techdevlp.templesguide.ui.views.login.LoginScreenComposable
 import com.techdevlp.templesguide.ui.views.splashscreen.SplashScreenComposable
 
@@ -40,6 +44,12 @@ fun NavGraphComposable(navController: NavHostController) {
 
         composable(route = ScreenNames.HomeScreen.route) {
             HomeScreenComposable(navController = navController)
+        }
+
+        composable(route=ScreenNames.DetailsScreen.route){
+            val templesDataGson = it.arguments?.getString(TEMPLE_DETAILS_DATA)
+            val templeData: TemplesData? = Gson().fromJson(templesDataGson, TemplesData::class.java)
+            DetailsScreenComposable(navController = navController, templeData = templeData)
         }
     }
 }

@@ -47,6 +47,7 @@ import androidx.navigation.NavController
 import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.google.firebase.FirebaseApp
+import com.google.gson.Gson
 import com.techdevlp.templesguide.MyApplicationContext
 import com.techdevlp.templesguide.R
 import com.techdevlp.templesguide.SetNavigationBarColor
@@ -54,6 +55,7 @@ import com.techdevlp.templesguide.SetStatusBarColor
 import com.techdevlp.templesguide.localdata.LocalStoredData
 import com.techdevlp.templesguide.localdata.model.LocationDetails
 import com.techdevlp.templesguide.localdata.model.UserDetails
+import com.techdevlp.templesguide.navigations.ScreenNames
 import com.techdevlp.templesguide.spTextSizeResource
 import com.techdevlp.templesguide.ui.theme.Black
 import com.techdevlp.templesguide.ui.theme.Light_blue
@@ -81,12 +83,13 @@ fun HomeScreenComposable(
         FirebaseApp.initializeApp(activity)
         myViewModel.getTemples()
     }
+
     SetStatusBarColor(color = Color.Transparent, isIconLight = true)
     SetNavigationBarColor(color = Color.Transparent, isIconLight = true)
 
     Column(modifier = Modifier.fillMaxSize()) {
         HeaderViewsUi(userDetails, locationDetails)
-        TemplesListUI(myViewModel = myViewModel, activity = activity)
+        TemplesListUI(myViewModel = myViewModel, activity = activity, navController = navController)
     }
 }
 
@@ -183,7 +186,11 @@ fun HeaderViewsUi(
  * @Version V1.0
  */
 @Composable
-fun TemplesListUI(myViewModel: HomeScreenViewModel, activity: Activity) {
+fun TemplesListUI(
+    myViewModel: HomeScreenViewModel,
+    activity: Activity,
+    navController: NavController
+) {
     val templeList by myViewModel.templeList.observeAsState(emptyList())
     val listState = rememberLazyGridState()
 
@@ -212,13 +219,19 @@ fun TemplesListUI(myViewModel: HomeScreenViewModel, activity: Activity) {
 
         items(templeList.size) { index ->
             val templeData = templeList[index]
-            ListItemsUI(templeData = templeData, activity = activity)
+            ListItemsUI(templeData = templeData, activity = activity) {
+                navController.navigate(
+                    route = ScreenNames.DetailsScreen.passArguments(
+                        templeDetailsData = Gson().toJson(templeData)
+                    )
+                )
+            }
         }
     }
 }
 
 @Composable
-fun ListItemsUI(templeData: TemplesData?, activity: Activity) {
+fun ListItemsUI(templeData: TemplesData?, activity: Activity, onClick: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -227,20 +240,20 @@ fun ListItemsUI(templeData: TemplesData?, activity: Activity) {
                 Light_blue,
                 shape = RoundedCornerShape(dimensionResource(id = R.dimen.dp25))
             )
-            .clickable { },
+            .clickable { onClick() },
         verticalArrangement = Arrangement.Center
     ) {
-        
-            AsyncImage(
-                model = templeData?.imageUrl,
-                contentDescription = "",
-                imageLoader = ImageLoader(activity),
-                modifier = Modifier
-                    .clip(RoundedCornerShape(dimensionResource(id = R.dimen.dp25)))
-                    .background(Color.Gray)
-                    .fillMaxSize(),
-                placeholder = painterResource(id = R.drawable.app_icon)
-            )
+
+        AsyncImage(
+            model = templeData?.imageUrl,
+            contentDescription = "",
+            imageLoader = ImageLoader(activity),
+            modifier = Modifier
+                .clip(RoundedCornerShape(dimensionResource(id = R.dimen.dp25)))
+                .background(Color.Gray)
+                .fillMaxSize(),
+            placeholder = painterResource(id = R.drawable.app_icon)
+        )
 
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.dp10)))
 
