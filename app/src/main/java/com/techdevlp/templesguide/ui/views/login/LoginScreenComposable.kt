@@ -2,6 +2,8 @@ package com.techdevlp.templesguide.ui.views.login
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -34,6 +36,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
@@ -55,17 +58,9 @@ fun LoginScreenComposable(
     navController: NavController
 ) {
     val activity = LocalContext.current as Activity
-    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-        .requestIdToken(activity.getString(R.string.default_web_client_id))
-        .requestEmail()
-        .build()
-
-    val googleSignInClient = remember { GoogleSignIn.getClient(activity, gso) }
-
-    val googleSignInLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+    val clientId = activity.getString(R.string.default_web_client_id)
+    val signInLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
+        val task = GoogleSignIn.getSignedInAccountFromIntent(result.data!!)
         handleSignInResult(task, navController)
     }
 
@@ -123,8 +118,7 @@ fun LoginScreenComposable(
                 .padding(bottom = dimensionResource(id = R.dimen.dp70))
                 .clickable {
                     if (isInternetAvailable(context = activity)) {
-                        val signInIntent = googleSignInClient.signInIntent
-                        googleSignInLauncher.launch(signInIntent)
+                        signInLauncher.launch(getSignInIntent(activity, clientId))
                     } else {
                         showSnack = true
                     }
@@ -146,11 +140,21 @@ fun LoginScreenComposable(
     SnackbarHost(hostState = snackBarHostState)
 }
 
+private fun getSignInIntent(context: Context, clientId: String): Intent {
+    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        .requestIdToken(clientId)
+        .requestEmail()
+        .build()
+
+    val signInClient: GoogleSignInClient = GoogleSignIn.getClient(context, gso)
+    return signInClient.signInIntent
+}
+
 /**
  * Checking the given google login details and navigate to home screen.
  * @Version V1.0
  */
-fun handleSignInResult(
+private fun handleSignInResult(
     task: Task<GoogleSignInAccount>,
     navController: NavController
 ) {
@@ -174,6 +178,7 @@ fun handleSignInResult(
             }
         }
     } catch (e: ApiException) {
+        // Handle sign-in failure
         Log.v("GoogleSignInError", "signInResult:failed code=" + e.statusCode)
     }
 }

@@ -1,7 +1,6 @@
 package com.techdevlp.templesguide.ui.views.splashscreen
 
 import android.Manifest
-import android.app.Activity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -19,7 +18,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -34,13 +32,10 @@ fun SplashScreenComposable(
     navController: NavController,
     mViewModel: SplashScreenViewModel = viewModel()
 ) {
-
-    val activity = LocalContext.current as Activity
     SetAppLogo()
     CallGetCurrentLocation(
         navController = navController,
-        mViewModel = mViewModel,
-        context = activity
+        mViewModel = mViewModel
     )
 }
 
@@ -82,8 +77,7 @@ fun SetAppLogo(modifier: Modifier = Modifier) {
 @Composable
 fun CallGetCurrentLocation(
     navController: NavController,
-    mViewModel: SplashScreenViewModel,
-    context: Activity
+    mViewModel: SplashScreenViewModel
 ) {
     var isPermissionGranted by remember { mutableStateOf(false) }
     val launcher = rememberLauncherForActivityResult(
