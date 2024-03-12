@@ -118,4 +118,7 @@ dependencies {
 
     //Open street maps
     implementation (libs.osmdroid.android)
+
+    implementation (libs.androidx.material.v121)
+
 }

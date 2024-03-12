@@ -1,6 +1,7 @@
 package com.techdevlp.templesguide.localdata
 
 import android.content.Context
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -70,6 +71,20 @@ class LocalStoredData(private val context: Context) {
     suspend fun clearLocationDetails() {
         context.dataStore.edit { preferences ->
             preferences.remove(LOCATION_DETAILS_KEY)
+        }
+    }
+
+    suspend fun getOnBoardStatus(): Boolean? {
+        val booleanKey = booleanPreferencesKey("ON_BOARDING_STATUS") // Define your boolean key
+        return context.dataStore.data.map { preferences ->
+            preferences[booleanKey]
+        }.first()
+    }
+
+    suspend fun setOnBoardStatus(value: Boolean) {
+        val booleanKey = booleanPreferencesKey("ON_BOARDING_STATUS") // Define your boolean key
+        context.dataStore.edit { preferences ->
+            preferences[booleanKey] = value
         }
     }
 }

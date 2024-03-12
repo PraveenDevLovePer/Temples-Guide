@@ -13,6 +13,7 @@ import com.techdevlp.templesguide.ui.views.details.DetailsScreenComposable
 import com.techdevlp.templesguide.ui.views.home.HomeScreenComposable
 import com.techdevlp.templesguide.ui.views.home.TemplesData
 import com.techdevlp.templesguide.ui.views.login.LoginScreenComposable
+import com.techdevlp.templesguide.ui.views.onboarding.OnBoardingComposable
 import com.techdevlp.templesguide.ui.views.splashscreen.SplashScreenComposable
 
 @Composable
@@ -36,6 +37,9 @@ fun NavGraphComposable(navController: NavHostController) {
     ) {
         composable(route = ScreenNames.SplashScreen.route) {
             SplashScreenComposable(navController = navController)
+        }
+        composable(route = ScreenNames.OnBoardingScreen.route) {
+            OnBoardingComposable(navController = navController)
         }
 
         composable(route = ScreenNames.LoginScreen.route) {

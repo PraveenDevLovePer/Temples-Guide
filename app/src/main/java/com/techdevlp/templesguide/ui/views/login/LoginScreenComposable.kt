@@ -83,7 +83,7 @@ fun LoginScreenComposable(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    top = dimensionResource(id = R.dimen.dp30),
+                    top = dimensionResource(id = R.dimen.dp40),
                     start = dimensionResource(id = R.dimen.dp16),
                     end = dimensionResource(id = R.dimen.dp16)
                 ),
@@ -172,7 +172,7 @@ private fun handleSignInResult(
             dataStore.setUserDetails(userDetails)
 
             navController.navigate(route = ScreenNames.HomeScreen.route) {
-                popUpTo(route = ScreenNames.SplashScreen.route) {
+                popUpTo(route = ScreenNames.OnBoardingScreen.route) {
                     inclusive = true
                 }
             }

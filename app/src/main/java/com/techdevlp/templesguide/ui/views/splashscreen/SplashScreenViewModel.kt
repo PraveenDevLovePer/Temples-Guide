@@ -97,7 +97,13 @@ class SplashScreenViewModel : ViewModel() {
         viewModelScope.launch {
             val dataStore = LocalStoredData(MyApplicationContext.getContext())
             delay(3000)
-            if (dataStore.getUserDetails()?.userId == "" || dataStore.getUserDetails()?.userId.isNullOrEmpty()) {
+            if (dataStore.getOnBoardStatus() != true){
+                navController.navigate(route = ScreenNames.OnBoardingScreen.route) {
+                    popUpTo(route = ScreenNames.SplashScreen.route) {
+                        inclusive = true
+                    }
+                }
+            }else if (dataStore.getUserDetails()?.userId == "" || dataStore.getUserDetails()?.userId.isNullOrEmpty()) {
                 navController.navigate(route = ScreenNames.LoginScreen.route) {
                     popUpTo(route = ScreenNames.SplashScreen.route) {
                         inclusive = true

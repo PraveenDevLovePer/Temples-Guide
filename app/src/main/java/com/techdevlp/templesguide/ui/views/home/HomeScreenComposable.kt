@@ -17,14 +17,10 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -40,8 +36,6 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.ImageLoader
@@ -142,42 +136,42 @@ fun HeaderViewsUi(
             )
         }
 
-        val (value, onValueChange) = remember { mutableStateOf("") }
-        TextField(
-            value = value,
-            onValueChange = { newValue ->
-                val filteredValue = newValue.filter { it.isLetter() && it in 'a'..'z' }
-                onValueChange(filteredValue)
-            },
-            textStyle = TextStyle(fontSize = spTextSizeResource(id = R.dimen.sp16), color = Black),
-            leadingIcon = {
-                Icon(Icons.Filled.Search, null, tint = Color.Gray)
-            },
-            modifier = Modifier
-                .padding(
-                    start = dimensionResource(id = R.dimen.dp15),
-                    end = dimensionResource(id = R.dimen.dp15),
-                    top = dimensionResource(id = R.dimen.dp10)
-                )
-                .height(dimensionResource(id = R.dimen.dp53))
-                .fillMaxWidth()
-                .background(
-                    Light_blue,
-                    RoundedCornerShape(dimensionResource(id = R.dimen.dp50))
-                ),
-            placeholder = { Text(text = "eg: tirupati") },
-            colors = OutlinedTextFieldDefaults.colors(
-                cursorColor = Color.Gray,
-                focusedBorderColor = Color.Transparent,
-                unfocusedBorderColor = Color.Transparent,
-                focusedLabelColor = Color.Black
-            ),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Search,
-                keyboardType = KeyboardType.Text
-            ),
-            singleLine = true
-        )
+//        val (value, onValueChange) = remember { mutableStateOf("") }
+//        TextField(
+//            value = value,
+//            onValueChange = { newValue ->
+//                val filteredValue = newValue.filter { it.isLetter() && it in 'a'..'z' }
+//                onValueChange(filteredValue)
+//            },
+//            textStyle = TextStyle(fontSize = spTextSizeResource(id = R.dimen.sp16), color = Black),
+//            leadingIcon = {
+//                Icon(Icons.Filled.Search, null, tint = Color.Gray)
+//            },
+//            modifier = Modifier
+//                .padding(
+//                    start = dimensionResource(id = R.dimen.dp15),
+//                    end = dimensionResource(id = R.dimen.dp15),
+//                    top = dimensionResource(id = R.dimen.dp10)
+//                )
+//                .height(dimensionResource(id = R.dimen.dp53))
+//                .fillMaxWidth()
+//                .background(
+//                    Light_blue,
+//                    RoundedCornerShape(dimensionResource(id = R.dimen.dp50))
+//                ),
+//            placeholder = { Text(text = "eg: tirupati") },
+//            colors = OutlinedTextFieldDefaults.colors(
+//                cursorColor = Color.Gray,
+//                focusedBorderColor = Color.Transparent,
+//                unfocusedBorderColor = Color.Transparent,
+//                focusedLabelColor = Color.Black
+//            ),
+//            keyboardOptions = KeyboardOptions.Default.copy(
+//                imeAction = ImeAction.Search,
+//                keyboardType = KeyboardType.Text
+//            ),
+//            singleLine = true
+//        )
     }
 }
 
@@ -283,7 +277,7 @@ fun ListItemsUI(templeData: TemplesData?, activity: Activity, onClick: () -> Uni
             )
 
             Text(
-                text = templeData?.city ?: "",
+                text = templeData?.address ?: "",
                 style = TextStyle(
                     fontSize = spTextSizeResource(id = R.dimen.sp13),
                     color = Color.Gray
