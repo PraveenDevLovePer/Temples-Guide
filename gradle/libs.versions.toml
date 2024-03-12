@@ -1,5 +1,7 @@
 [versions]
 agp = "8.3.0"
+firebase-ml-natural-language = "22.0.1"
+firebase-ml-natural-language-translate-model = "20.0.9"
 kotlin = "1.9.0"
 core-ktx = "1.12.0"
 junit = "4.13.2"
@@ -40,6 +42,8 @@ compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose-debug-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose-debug-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+firebase-ml-natural-language = { module = "com.google.firebase:firebase-ml-natural-language", version.ref = "firebase-ml-natural-language" }
+firebase-ml-natural-language-translate-model = { module = "com.google.firebase:firebase-ml-natural-language-translate-model", version.ref = "firebase-ml-natural-language-translate-model" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }

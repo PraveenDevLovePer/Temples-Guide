@@ -111,4 +111,7 @@ dependencies {
     //For livedata
     implementation (libs.androidx.runtime)
     implementation (libs.androidx.runtime.livedata)
+
+    implementation (libs.firebase.ml.natural.language)
+    implementation (libs.firebase.ml.natural.language.translate.model)
 }
