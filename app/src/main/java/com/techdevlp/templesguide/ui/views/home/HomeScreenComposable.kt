@@ -230,6 +230,10 @@ fun TemplesListUI(
     }
 }
 
+/**
+ * List item ui and functionality.
+ * @Version V1.0
+ */
 @Composable
 fun ListItemsUI(templeData: TemplesData?, activity: Activity, onClick: () -> Unit) {
     Column(
@@ -298,6 +302,10 @@ fun ListItemsUI(templeData: TemplesData?, activity: Activity, onClick: () -> Uni
     }
 }
 
+/**
+ * Model for TempleData.
+ * @Version V1.0
+ */
 data class TemplesData(
     val name: String,
     val city: String,

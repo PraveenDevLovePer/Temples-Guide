@@ -65,6 +65,14 @@ fun SetAppLogo(modifier: Modifier = Modifier) {
                     textAlign = TextAlign.Center,
                     color = Color.White,
                 )
+                Text(
+                    text = "Explore the beauty of Tirupati",
+                    modifier = modifier
+                        .fillMaxWidth(),
+                    style = Typography.labelSmall,
+                    textAlign = TextAlign.Center,
+                    color = Color.White,
+                )
             }
         }
     }

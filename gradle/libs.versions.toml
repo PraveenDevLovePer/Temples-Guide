@@ -12,6 +12,7 @@ activity-compose = "1.8.2"
 compose-bom = "2023.10.01"
 core-splashscreen = "1.0.1"
 navigation-runtime-ktx = "2.7.6"
+osmdroid-android = "6.1.0"
 retrofit = "2.9.0"
 datastore-preferences = "1.0.0"
 navigation-compose = "2.7.6"
@@ -50,6 +51,7 @@ espresso-core = { group = "androidx.test.espresso", name = "espresso-core", vers
 lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
+osmdroid-android = { module = "org.osmdroid:osmdroid-android", version.ref = "osmdroid-android" }
 ui = { group = "androidx.compose.ui", name = "ui" }
 ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }

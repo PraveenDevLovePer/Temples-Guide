@@ -49,7 +49,7 @@ fun NavGraphComposable(navController: NavHostController) {
         composable(route=ScreenNames.DetailsScreen.route){
             val templesDataGson = it.arguments?.getString(TEMPLE_DETAILS_DATA)
             val templeData: TemplesData? = Gson().fromJson(templesDataGson, TemplesData::class.java)
-            DetailsScreenComposable(navController = navController, templeData = templeData)
+            DetailsScreenComposable(templeData = templeData)
         }
     }
 }

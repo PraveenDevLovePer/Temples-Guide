@@ -96,7 +96,7 @@ class SplashScreenViewModel : ViewModel() {
     private fun navigateToNextScreen(navController: NavController) {
         viewModelScope.launch {
             val dataStore = LocalStoredData(MyApplicationContext.getContext())
-            delay(2000)
+            delay(3000)
             if (dataStore.getUserDetails()?.userId == "" || dataStore.getUserDetails()?.userId.isNullOrEmpty()) {
                 navController.navigate(route = ScreenNames.LoginScreen.route) {
                     popUpTo(route = ScreenNames.SplashScreen.route) {

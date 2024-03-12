@@ -112,6 +112,10 @@ dependencies {
     implementation (libs.androidx.runtime)
     implementation (libs.androidx.runtime.livedata)
 
+    //Ml model for language change
     implementation (libs.firebase.ml.natural.language)
     implementation (libs.firebase.ml.natural.language.translate.model)
+
+    //Open street maps
+    implementation (libs.osmdroid.android)
 }
