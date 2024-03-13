@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -18,10 +19,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.google.android.gms.location.LocationServices
+import com.techdevlp.templesguide.BuildConfig
 import com.techdevlp.templesguide.MyApplicationContext
 import com.techdevlp.templesguide.R
 import com.techdevlp.templesguide.ui.theme.AppThemeColor
@@ -74,6 +77,17 @@ fun SetAppLogo(modifier: Modifier = Modifier) {
                     color = Color.White,
                 )
             }
+
+            Text(
+                text = "V(${BuildConfig.VERSION_NAME})",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = dimensionResource(id = R.dimen.dp35))
+                    .align(Alignment.BottomCenter),
+                style = Typography.labelMedium,
+                textAlign = TextAlign.Center,
+                color = Color.White,
+            )
         }
     }
 }

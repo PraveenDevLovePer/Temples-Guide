@@ -57,6 +57,7 @@ import com.techdevlp.templesguide.ui.theme.AppThemeColor
 import com.techdevlp.templesguide.ui.theme.Black
 import com.techdevlp.templesguide.ui.theme.Light_White
 import com.techdevlp.templesguide.ui.theme.Light_blue
+import com.techdevlp.templesguide.ui.views.ads.BannerAd
 import com.techdevlp.templesguide.ui.views.home.TemplesData
 import org.osmdroid.api.IMapController
 import org.osmdroid.config.Configuration
@@ -109,6 +110,8 @@ fun DetailsScreenComposable(templeData: TemplesData?) {
                 TimingViewsUI(templeData = templeData)
 
                 AddressViewsUI(templeData = templeData)
+                
+                BannerAd()
             }
         }
     }

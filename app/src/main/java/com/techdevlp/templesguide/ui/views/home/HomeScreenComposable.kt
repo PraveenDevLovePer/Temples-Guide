@@ -53,6 +53,7 @@ import com.techdevlp.templesguide.navigations.ScreenNames
 import com.techdevlp.templesguide.spTextSizeResource
 import com.techdevlp.templesguide.ui.theme.Black
 import com.techdevlp.templesguide.ui.theme.Light_blue
+import com.techdevlp.templesguide.ui.views.ads.BannerAd
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
@@ -73,7 +74,7 @@ fun HomeScreenComposable(
         val location = LocalStoredData(MyApplicationContext.getContext()).getLocationDetails()
         locationDetails.value = location
 
-//        Initialise the fire base
+        //Initialise the fire base
         FirebaseApp.initializeApp(activity)
         myViewModel.getTemples()
     }
@@ -84,6 +85,9 @@ fun HomeScreenComposable(
     Column(modifier = Modifier.fillMaxSize()) {
         HeaderViewsUi(userDetails, locationDetails)
         TemplesListUI(myViewModel = myViewModel, activity = activity, navController = navController)
+        Spacer(modifier = Modifier.weight(1f))
+        BannerAd()
+        Spacer(modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.dp20)))
     }
 }
 

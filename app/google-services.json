@@ -30,6 +30,14 @@
           }
         },
         {
+          "client_id": "652135036998-u9ae38kkpg2getc8vf886klo66jivptu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techdevlp.templesguide",
+            "certificate_hash": "66299256706ba524b3e82b3bb3b85dc54a6fe12c"
+          }
+        },
+        {
           "client_id": "652135036998-gqtu9nnjlhpggmfl2bttq4hi4scetdji.apps.googleusercontent.com",
           "client_type": 3
         }

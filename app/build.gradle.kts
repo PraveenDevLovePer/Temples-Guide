@@ -5,6 +5,15 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        create("release") {
+            storeFile =
+                file("C:\\Users\\Praveen\\AndroidStudioProjects\\jks\\templestrip\\templestrip.jks")
+            storePassword = "temples_trip"
+            keyAlias = "Temples_Trip"
+            keyPassword = "temples_trip"
+        }
+    }
     namespace = "com.techdevlp.templesguide"
     compileSdk = 34
 
@@ -19,6 +28,7 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        signingConfig = signingConfigs.getByName("release")
     }
 
     buildTypes {
@@ -28,6 +38,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {
@@ -39,6 +50,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -100,6 +112,7 @@ dependencies {
 
     //Material design
     implementation(libs.material.v2)
+    implementation (libs.androidx.material.v121)
 
     //FireStore database
     implementation(libs.firebase.firestore.ktx)
@@ -119,6 +132,7 @@ dependencies {
     //Open street maps
     implementation (libs.osmdroid.android)
 
-    implementation (libs.androidx.material.v121)
+    //Google admob
+    implementation (libs.play.services.ads)
 
 }

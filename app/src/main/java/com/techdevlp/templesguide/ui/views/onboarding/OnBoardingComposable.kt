@@ -1,8 +1,5 @@
 package com.techdevlp.templesguide.ui.views.onboarding
 
-import android.Manifest
-import android.content.pm.PackageManager
-import androidx.activity.ComponentActivity
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -11,7 +8,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -32,9 +28,6 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonColors
-import androidx.compose.material.contentColorFor
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
@@ -50,20 +43,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.techdevlp.templesguide.MyApplicationContext
 import com.techdevlp.templesguide.R
 import com.techdevlp.templesguide.SetNavigationBarColor
@@ -152,6 +137,10 @@ fun OnBoardingComposable(
     }
 }
 
+/**
+ * Item Views UI.
+ * @Version V1.0
+ */
 @Composable
 fun OnBoardingItemsComposable(
     item: OnBoardingItems,
@@ -234,6 +223,10 @@ fun OnBoardingItemsComposable(
     }
 }
 
+/**
+ * Indicators functionality.
+ * @Version V1.0
+ */
 @Composable
 fun BoxScope.Indicators(
     size: Int,
@@ -250,6 +243,10 @@ fun BoxScope.Indicators(
     }
 }
 
+/**
+ * Indicator ui.
+ * @Version V1.0
+ */
 @Composable
 fun Indicator(isSelected: Boolean) {
     val width = animateDpAsState(
@@ -268,6 +265,10 @@ fun Indicator(isSelected: Boolean) {
     )
 }
 
+/**
+ * Onboarding items model.
+ * @Version V1.0
+ */
 class OnBoardingItems(
     val image: Int,
     val title: String,
@@ -278,23 +279,23 @@ class OnBoardingItems(
             return listOf(
                 OnBoardingItems(
                     R.drawable.onboard_one,
-                    "Welcome to TempleExplore!",
-                    "Discover temples near Tirupati city and immerse yourself in their stories. TempleExplore is your gateway to exploring the rich cultural heritage of the region."
+                    "Welcome to TemplesGuide!",
+                    "Discover temples near Tirupati city and immerse yourself in their stories. TemplesGuide is your gateway to exploring the rich cultural heritage of the region."
                 ),
                 OnBoardingItems(
                     R.drawable.onboard_two,
                     "Explore in Your Language",
-                    "TempleExplore offers temple stories and information in multiple languages including English, Telugu, Tamil, Kannada, and Hindi. Experience the richness of temple narratives in a language that resonates with you."
+                    "TemplesGuide offers temple stories and information in multiple languages including English, Telugu, Tamil, Kannada, and Hindi. Experience the richness of temple narratives in a language that resonates with you."
                 ),
                 OnBoardingItems(
                     R.drawable.onboard_three,
                     "Find Your Way",
-                    "With TempleExplore, locating temples is effortless. Use our integrated maps feature to pinpoint temple locations and navigate with ease. Discover the hidden gems of Tirupati city with just a tap."
+                    "With TemplesGuide, locating temples is effortless. Use our integrated maps feature to pinpoint temple locations and navigate with ease. Discover the hidden gems of Tirupati city with just a tap."
                 ),
                 OnBoardingItems(
                     R.drawable.onboard_four,
                     "Your Privacy, Our Priority",
-                    "We respect your privacy. TempleExplore does not read or store your personal data. Enjoy exploring temples near Tirupati city without worrying about your privacy. Your journey with us is secure and confidential."
+                    "We respect your privacy. TemplesGuide does not read or store your personal data. Enjoy exploring temples near Tirupati city without worrying about your privacy. Your journey with us is secure and confidential."
                 )
             )
         }
